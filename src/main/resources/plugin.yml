@@ -5,5 +5,5 @@ api-version: 1.16
 authors: [ikoli, Ris]
 
 commands:
-  chestshop:
-    aliases: [cs]
+  spygneeds:
+    aliases: [needs]
