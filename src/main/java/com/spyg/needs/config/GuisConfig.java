@@ -16,6 +16,11 @@ public class GuisConfig extends YamlManager {
         set("item_requesting.filleritem.lore", Arrays.asList("&r"));
 
         set("main.title", "&7Player needs");
+        set("main.needed-slots", "0-44", Arrays.asList("The slots that will be used to display player's needs."));
+        set("main.need.name", "&7%player%'s needs");
+        set("main.need.material", "%material%");
+        set("main.need.lore", Arrays.asList("&r", "&7Amount: %amount%"));
+
         set("main.items.refresh.name", "&6Refresh");
         set("main.items.refresh.material", "PAPER");
         set("main.items.refresh.slot", 47);
