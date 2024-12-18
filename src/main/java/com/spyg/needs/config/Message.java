@@ -6,7 +6,8 @@ import org.bukkit.entity.Player;
 import net.kyori.adventure.text.Component;
 
 public enum Message {
-    PREFIX("prefix", "&8[&6SpygNeeds&8] &7»&r"), MUST_RUN_BY_PLAYER("must-run-by-player", "&c%prefix% This command must be run by a player."),
+    PREFIX("prefix", "&8[&6SpygNeeds&8] &7»&r"), 
+    MUST_RUN_BY_PLAYER("must-run-by-player", "&c%prefix% This command must be run by a player."),
     NO_PERMISSION("no-permission", "%prefix% &cYou do not have permission to do this."),
 
     GUI_MAIN_TITLE("guis.main.title", "&6Player Needs");
@@ -18,16 +19,14 @@ public enum Message {
     private Message(String node, String defaultMessage) {
         this.node = node;
         this.defaultMessage = defaultMessage;
-
-        setDefault();
     }
 
-    public static void sendMessage(Player player, Message message) {
-        player.sendMessage(message.get());
+    public void sendMessage(Player player) {
+        player.sendMessage(get());
     }
 
-    public static void sendMessage(CommandSender sender, Message message) {
-        sender.sendMessage(message.get());
+    public void sendMessage(CommandSender sender) {
+        sender.sendMessage(get());
     }
 
     public String getNode() {
@@ -51,5 +50,8 @@ public enum Message {
 
     public static void init(Config conf) {
         config = conf;
+        for (Message message : Message.values()) {
+            message.setDefault();
+        }
     }
 }

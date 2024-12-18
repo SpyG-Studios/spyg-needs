@@ -21,7 +21,7 @@ public class CommandListener implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            Message.sendMessage(sender, Message.MUST_RUN_BY_PLAYER);
+            Message.MUST_RUN_BY_PLAYER.sendMessage(sender);
             return true;
         }
 
