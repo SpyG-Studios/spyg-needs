@@ -30,6 +30,17 @@ public class CommandListener implements CommandExecutor, Listener {
             return true;
         }
 
+        if (args[0].equalsIgnoreCase("reload")) {
+            if (player.hasPermission("spygneeds.reload")) {
+                SpygNeeds.getInstance().getConf().reloadConfig();
+                SpygNeeds.getInstance().getGuisConfig().reloadConfig();
+                Message.CONFIG_RELOADED.sendMessage(player);
+                return true;
+            }
+
+            Message.NO_PERMISSION.sendMessage(player);
+        }
+
         return true;
     }
 
