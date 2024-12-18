@@ -15,7 +15,7 @@ public class SpygNeeds extends JavaPlugin {
         instance = this;
         config = new Config(this);
         new CommandListener(this, "spygneeds");
-        Message.init();
+        Message.init(config);
 
         getLogger().info("<plugin> v. <version> plugin has been enabled!".replace("<plugin>", getName()).replace("<version>", getPluginMeta().getVersion()));
     }
