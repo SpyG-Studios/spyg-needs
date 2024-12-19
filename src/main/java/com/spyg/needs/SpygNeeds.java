@@ -1,17 +1,21 @@
 package com.spyg.needs;
 
+import java.io.File;
+import java.util.UUID;
+
+import javax.xml.crypto.Data;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.spyg.needs.config.Config;
+import com.spyg.needs.config.DataSave;
 import com.spyg.needs.config.GuisConfig;
 import com.spyg.needs.config.Message;
 import com.spyg.needs.listeners.CommandListener;
 import com.spyg.needs.listeners.InventoryClickListener;
 import com.spyg.needs.listeners.InventoryCloseListener;
 import com.spyg.needs.listeners.PlayerChatListener;
-import com.spyg.needs.needs.PlayerNeeds;
-
 import lombok.Getter;
 
 public class SpygNeeds extends JavaPlugin {
@@ -35,9 +39,8 @@ public class SpygNeeds extends JavaPlugin {
         new InventoryCloseListener(instance);
         new PlayerChatListener(instance);
 
-        Bukkit.getOnlinePlayers().forEach((player) -> {
-            new PlayerNeeds(player.getUniqueId());
-        });
+        DataSave.loadAll();
+        DataSave.startSavingTask();
 
         Message.init(conf);
 
@@ -45,7 +48,12 @@ public class SpygNeeds extends JavaPlugin {
     }
 
     public void onDisable() {
+        DataSave.saveAll();
         getLogger().info("<plugin> v. <version> plugin has been disabled!".replace("<plugin>", getName()).replace("<version>", getPluginMeta().getVersion()));
+    }
+
+    public String getNameFromUUID(String uuid) {
+        return Bukkit.getOfflinePlayer(UUID.fromString(uuid)).getName();
     }
 
 }

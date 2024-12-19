@@ -19,6 +19,7 @@ import com.spyg.needs.config.Message;
 import com.spygstudios.spyglib.broadcast.BroadcastMessage;
 
 import lombok.Getter;
+import lombok.Setter;
 
 public class PlayerNeeds extends DataSave {
 
@@ -31,6 +32,13 @@ public class PlayerNeeds extends DataSave {
     private Map<Material, Integer> items = new HashMap<Material, Integer>();
 
     @Getter
+    private Map<Material, Integer> inventory = new HashMap<Material, Integer>();
+
+    @Getter
+    @Setter
+    private boolean isChanged = false;
+
+    @Getter
     private OfflinePlayer requester;
 
     public PlayerNeeds(UUID requester) {
@@ -39,34 +47,71 @@ public class PlayerNeeds extends DataSave {
         this.requester = Bukkit.getOfflinePlayer(requester);
 
         ConfigurationSection needsSection = getConfigurationSection("needs");
+        ConfigurationSection inventorySection = getConfigurationSection("inventory");
 
         needs.add(this);
 
         if (needsSection == null) {
-            return;
+            needsSection = createSection("needs");
+            saveConfig();
+        }
+
+        if (inventorySection == null) {
+            inventorySection = createSection("inventory");
+            saveConfig();
+        }
+
+        for (String key : inventorySection.getKeys(false)) {
+            inventory.put(Material.getMaterial(key), inventorySection.getInt(key));
         }
 
         for (String key : needsSection.getKeys(false)) {
-            System.out.println("1. Loading need: " + key + " " + needsSection.getInt(key));
             items.put(Material.getMaterial(key), needsSection.getInt(key));
         }
+
+        recalculateNeededByInventory();
+
+    }
+
+    public void recalculateNeededByInventory() {
+
+        for (Material need : items.keySet()) {
+            for (Material material : inventory.keySet()) {
+
+                if (material.equals(need)) {
+                    if (inventory.get(material) >= items.get(need)) {
+                        items.remove(need);
+                    }
+                }
+            }
+        }
+
+        isChanged = true;
+
+    }
+
+    public void addInventory(Material material, int amount) {
+
+        int need = items.get(material);
+        if (need > amount) {
+            items.put(material, need - amount);
+        } else {
+            items.remove(material);
+        }
+
+        if (inventory.containsKey(material)) {
+            inventory.put(material, inventory.get(material) + amount);
+        } else {
+            inventory.put(material, amount);
+        }
+
+        recalculateNeededByInventory();
 
     }
 
     public void addNeed(Material material, int amount) {
 
-        System.out.println("2. Current needs");
-        for (Material mat : items.keySet()) {
-            System.out.println(mat.name() + " " + items.get(mat));
-        }
-
-        System.out.println("3. Adding need: " + material.name() + " " + amount);
         items.put(material, amount);
-
-        System.out.println("4. Current needs after addition");
-        for (Material mat : items.keySet()) {
-            System.out.println(mat.name() + " " + items.get(mat));
-        }
 
         if (config.getBoolean("settings.broadcast-need.chat", true)) {
             BroadcastMessage.chat(Message.BROADCAST_ADDED_NEED_CHAT.getRaw(), Map.of("%player%", requester.getName(), "%item%", material.name(), "%prefix%", config.getPrefix(), "%amount%", String.valueOf(amount)));
@@ -76,30 +121,37 @@ public class PlayerNeeds extends DataSave {
             BroadcastMessage.actionBar(Message.BROADCAST_ADDED_NEED_ACTIONBAR.getRaw(), Map.of("%player%", requester.getName(), "%item%", material.name(), "%prefix%", config.getPrefix(), "%amount%", String.valueOf(amount)));
         }
 
-        System.out.println("STATIC NEEDS SIZE: " + needs.size());
+        isChanged = true;
 
-        save();
     }
 
     public void save() {
 
-        System.out.println("5. Saving needs");
-        for (Material material : items.keySet()) {
+        set("needs", null);
+        set("inventory", null);
 
-            System.out.println("Saving need: " + material.name() + " " + items.get(material));
+        for (Material material : items.keySet()) {
             overwriteSet("needs." + material.name(), items.get(material));
+        }
+
+        for (Material material : inventory.keySet()) {
+            overwriteSet("inventory." + material.name(), inventory.get(material));
         }
 
         saveConfig();
     }
 
     public static PlayerNeeds getPlayerNeeds(Player player) {
+        return getPlayerNeeds(player.getUniqueId());
+    }
+
+    public static PlayerNeeds getPlayerNeeds(UUID uuid) {
         for (PlayerNeeds need : needs) {
-            if (need.getRequester().equals(player)) {
+            if (need.getRequester().getUniqueId().equals(uuid)) {
                 return need;
             }
         }
-        return new PlayerNeeds(player.getUniqueId());
+        return new PlayerNeeds(uuid);
     }
 
 }

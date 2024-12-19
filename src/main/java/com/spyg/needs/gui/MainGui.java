@@ -1,10 +1,7 @@
 package com.spyg.needs.gui;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -14,14 +11,14 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import com.spyg.needs.SpygNeeds;
-import com.spyg.needs.config.DataSave;
 import com.spyg.needs.config.GuisConfig;
-import com.spyg.needs.needs.PendingNeed;
 import com.spyg.needs.needs.PlayerNeeds;
 import com.spygstudios.spyglib.color.TranslateColor;
 import com.spygstudios.spyglib.item.ItemUtils;
 import com.spygstudios.spyglib.persistentdata.PersistentData;
 import com.spygstudios.spyglib.placeholder.ParseListPlaceholder;
+
+import lombok.Getter;
 
 public class MainGui {
 
@@ -48,24 +45,7 @@ public class MainGui {
             throw new IllegalArgumentException("Invalid needed slots in the main GUI section. Must be in the format 'min-max'. Example: '0-44'");
         }
 
-        List<PlayerNeeds> needs = new ArrayList<PlayerNeeds>();
-
-        File dataFolder = new File(SpygNeeds.getInstance().getDataFolder(), "data");
-        if (!dataFolder.exists()) {
-            dataFolder.mkdirs();
-        }
-
-        File[] files = dataFolder.listFiles();
-
-        for (int i = 0; i < files.length; i++) {
-            File file = files[i];
-            String name = file.getName();
-            if (name.endsWith(".yml")) {
-                String uuid = name.replace(".yml", "");
-                PlayerNeeds need = new PlayerNeeds(UUID.fromString(uuid));
-                needs.add(need);
-            }
-        }
+        List<PlayerNeeds> needs = PlayerNeeds.getNeeds();
 
         int i = startSlot;
         for (PlayerNeeds need : needs) {
@@ -125,14 +105,11 @@ public class MainGui {
 
     public static class MainGuiHolder implements InventoryHolder {
 
+        @Getter
         private final Player player;
 
         public MainGuiHolder(Player player) {
             this.player = player;
-        }
-
-        public Player getPlayer() {
-            return player;
         }
 
         @Override

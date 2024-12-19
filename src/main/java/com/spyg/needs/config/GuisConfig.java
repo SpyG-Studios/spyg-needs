@@ -15,6 +15,8 @@ public class GuisConfig extends YamlManager {
         set("item_requesting.filleritem.material", "GRAY_STAINED_GLASS_PANE");
         set("item_requesting.filleritem.lore", Arrays.asList("&r"));
 
+        set("item_adding.title", "&7%requester% is requesting %amount% of %material%");
+
         set("main.title", "&7Player needs");
         set("main.needed-slots", "0-44", Arrays.asList("The slots that will be used to display player's needs."));
         set("main.need.name", "&7%player%'s needs");

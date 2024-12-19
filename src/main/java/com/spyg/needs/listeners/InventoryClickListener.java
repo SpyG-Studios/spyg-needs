@@ -7,6 +7,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.spyg.needs.SpygNeeds;
+import com.spyg.needs.config.Message;
+import com.spyg.needs.gui.ItemAdding;
 import com.spyg.needs.gui.ItemRequesting;
 import com.spyg.needs.gui.MainGui;
 import com.spyg.needs.gui.ItemRequesting.ItemRequestingHolder;
@@ -44,7 +46,7 @@ public class InventoryClickListener implements Listener {
 
     }
 
-    public void requestingGui(InventoryClickEvent event) {
+    private void requestingGui(InventoryClickEvent event) {
 
         int slot = event.getSlot();
 
@@ -54,7 +56,7 @@ public class InventoryClickListener implements Listener {
 
     }
 
-    public void mainGui(InventoryClickEvent event) {
+    private void mainGui(InventoryClickEvent event) {
         PersistentData data = new PersistentData(SpygNeeds.getInstance(), event.getCurrentItem());
 
         String action = data.getString("action");
@@ -80,6 +82,20 @@ public class InventoryClickListener implements Listener {
         case "request":
             player.closeInventory();
             ItemRequesting.open(player);
+            break;
+        case "give":
+            player.closeInventory();
+
+            String material = data.getString("material");
+            int amount = data.getInt("amount");
+            String requester = data.getString("requester");
+
+            if (requester.equals(player.getUniqueId().toString())) {
+                Message.CANT_GIVE_YOURSELF.sendMessage(player);
+                return;
+            }
+
+            ItemAdding.open(player, material, amount, requester);
             break;
 
         default:

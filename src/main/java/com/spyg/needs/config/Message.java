@@ -17,6 +17,12 @@ public enum Message {
 
     NO_PERMISSION("no-permission", "%prefix% &cYou do not have permission to do this."),
 
+    CANT_GIVE_YOURSELF("cant-give-yourself", "%prefix% &cYou can't give yourself items."),
+
+    WRONG_ITEMS_GIVEN("wrong-items-given", "%prefix% &cYou have added wrong items. &f%player%&c needs &f%item%&c."),
+
+    YOU_HAVE_GIVEN("you-have-given", "%prefix% &aYou have given &f%amount% %item% &ato &f%player%&a."),
+
     ENTER_AMOUNT_INVALID("enter-amount-invalid", "%prefix% &cInvalid amount (&f%entered%&c). Please enter a valid positive number."),
 
     ENTER_AMOUNT_CANCELLED("enter-amount-cancelled", "%prefix% &cYou have cancelled the process."),

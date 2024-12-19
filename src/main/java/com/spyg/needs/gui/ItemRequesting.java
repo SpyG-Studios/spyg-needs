@@ -13,6 +13,8 @@ import com.spyg.needs.config.GuisConfig;
 import com.spygstudios.spyglib.color.TranslateColor;
 import com.spygstudios.spyglib.item.ItemUtils;
 
+import lombok.Getter;
+
 public class ItemRequesting {
 
     public static void open(Player player) {
@@ -47,14 +49,11 @@ public class ItemRequesting {
 
     public static class ItemRequestingHolder implements InventoryHolder {
 
+        @Getter
         private final Player player;
 
         public ItemRequestingHolder(Player player) {
             this.player = player;
-        }
-
-        public Player getPlayer() {
-            return player;
         }
 
         @Override
