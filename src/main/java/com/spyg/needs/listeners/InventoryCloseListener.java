@@ -115,20 +115,23 @@ public class InventoryCloseListener implements Listener {
         }
 
         String itemListType = SpygNeeds.getInstance().getConf().getItemListType();
+        boolean itemListing = SpygNeeds.getInstance().getConf().isItemListEnabled();
         Player player = ((ItemRequestingHolder) event.getInventory().getHolder()).getPlayer();
         player.getInventory().addItem(centerItem);
 
-        if (itemListType.equalsIgnoreCase("whitelist")) {
-            if (!SpygNeeds.getInstance().getConf().getItemListItems().contains(centerItem.getType())) {
-                Message.ITEM_BLOCKED.sendMessage(player);
-                return;
+        if (itemListing) {
+            if (itemListType.equalsIgnoreCase("whitelist")) {
+                if (!SpygNeeds.getInstance().getConf().getItemListItems().contains(centerItem.getType())) {
+                    Message.ITEM_BLOCKED.sendMessage(player);
+                    return;
+                }
             }
-        }
 
-        if (itemListType.equalsIgnoreCase("blacklist")) {
-            if (SpygNeeds.getInstance().getConf().getItemListItems().contains(centerItem.getType())) {
-                Message.ITEM_BLOCKED.sendMessage(player);
-                return;
+            if (itemListType.equalsIgnoreCase("blacklist")) {
+                if (SpygNeeds.getInstance().getConf().getItemListItems().contains(centerItem.getType())) {
+                    Message.ITEM_BLOCKED.sendMessage(player);
+                    return;
+                }
             }
         }
 
