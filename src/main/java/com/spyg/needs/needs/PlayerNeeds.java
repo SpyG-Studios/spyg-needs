@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
@@ -28,12 +31,12 @@ public class PlayerNeeds extends DataSave {
     private Map<Material, Integer> items = new HashMap<Material, Integer>();
 
     @Getter
-    private Player requester;
+    private OfflinePlayer requester;
 
-    public PlayerNeeds(Player requester) {
-        super(requester.getUniqueId());
+    public PlayerNeeds(UUID requester) {
+        super(requester);
 
-        this.requester = requester;
+        this.requester = Bukkit.getOfflinePlayer(requester);
 
         ConfigurationSection needsSection = getConfigurationSection("needs");
 
@@ -44,7 +47,8 @@ public class PlayerNeeds extends DataSave {
         }
 
         for (String key : needsSection.getKeys(false)) {
-            items.put(Material.getMaterial(key), needsSection.getInt("needs." + key));
+            System.out.println("1. Loading need: " + key + " " + needsSection.getInt(key));
+            items.put(Material.getMaterial(key), needsSection.getInt(key));
         }
 
     }
@@ -95,7 +99,7 @@ public class PlayerNeeds extends DataSave {
                 return need;
             }
         }
-        return new PlayerNeeds(player);
+        return new PlayerNeeds(player.getUniqueId());
     }
 
 }

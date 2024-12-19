@@ -36,7 +36,7 @@ public class SpygNeeds extends JavaPlugin {
         new PlayerChatListener(instance);
 
         Bukkit.getOnlinePlayers().forEach((player) -> {
-            new PlayerNeeds(player);
+            new PlayerNeeds(player.getUniqueId());
         });
 
         Message.init(conf);

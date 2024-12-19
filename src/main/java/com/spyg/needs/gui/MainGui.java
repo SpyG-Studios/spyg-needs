@@ -1,7 +1,10 @@
 package com.spyg.needs.gui;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -11,6 +14,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import com.spyg.needs.SpygNeeds;
+import com.spyg.needs.config.DataSave;
 import com.spyg.needs.config.GuisConfig;
 import com.spyg.needs.needs.PendingNeed;
 import com.spyg.needs.needs.PlayerNeeds;
@@ -44,8 +48,26 @@ public class MainGui {
             throw new IllegalArgumentException("Invalid needed slots in the main GUI section. Must be in the format 'min-max'. Example: '0-44'");
         }
 
-        List<PlayerNeeds> needs = PlayerNeeds.getNeeds();
+        List<PlayerNeeds> needs = new ArrayList<PlayerNeeds>();
 
+        File dataFolder = new File(SpygNeeds.getInstance().getDataFolder(), "data");
+        if (!dataFolder.exists()) {
+            dataFolder.mkdirs();
+        }
+
+        File[] files = dataFolder.listFiles();
+
+        for (int i = 0; i < files.length; i++) {
+            File file = files[i];
+            String name = file.getName();
+            if (name.endsWith(".yml")) {
+                String uuid = name.replace(".yml", "");
+                PlayerNeeds need = new PlayerNeeds(UUID.fromString(uuid));
+                needs.add(need);
+            }
+        }
+
+        int i = startSlot;
         for (PlayerNeeds need : needs) {
             for (Map.Entry<Material, Integer> entry : need.getItems().entrySet()) {
                 Material material = entry.getKey();
@@ -53,7 +75,9 @@ public class MainGui {
                 String materialName = config.getString("main.need.material").replace("%material%", material.name());
                 String displayname = config.getString("main.need.name").replace("%player%", need.getRequester().getName()).replace("%amount%", String.valueOf(amount));
                 List<String> lore = ParseListPlaceholder.parse(config.getStringList("main.need.lore"), Map.of("%player%", need.getRequester().getName(), "%amount%", String.valueOf(amount)));
-                ItemStack item = ItemUtils.create(materialName, displayname, lore);
+
+                int itemAmount = amount > 64 ? 64 : amount;
+                ItemStack item = ItemUtils.create(materialName, displayname, lore, itemAmount);
                 PersistentData data = new PersistentData(SpygNeeds.getInstance(), item);
 
                 data.set("action", "give");
@@ -63,8 +87,11 @@ public class MainGui {
 
                 data.save();
 
-                inventory.setItem(startSlot, item);
-                startSlot++;
+                inventory.setItem(i, item);
+                i++;
+                if (i == endSlot) {
+                    break;
+                }
             }
         }
 

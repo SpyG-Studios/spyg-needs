@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -40,10 +39,6 @@ public abstract class DataSave extends YamlManager {
 
         return items;
 
-    }
-
-    public String getPlayerName() {
-        return Bukkit.getOfflinePlayer(uuid).getName();
     }
 
 }
