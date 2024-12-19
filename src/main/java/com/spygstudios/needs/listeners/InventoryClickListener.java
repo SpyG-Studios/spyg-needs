@@ -72,7 +72,37 @@ public class InventoryClickListener implements Listener {
         switch (action) {
         case "refresh":
             player.closeInventory();
-            MainGui.open(player);
+            int currentPage = data.getInt("page");
+            MainGui.open(player, currentPage);
+            break;
+
+        case "previous_page":
+            player.closeInventory();
+            currentPage = data.getInt("page");
+            int totalPages = data.getInt("total_pages");
+
+            if (currentPage <= 1) {
+                currentPage = totalPages;
+            } else {
+                currentPage--;
+            }
+
+            MainGui.open(player, currentPage);
+            break;
+
+        case "next_page":
+            player.closeInventory();
+
+            currentPage = data.getInt("page");
+            totalPages = data.getInt("total_pages");
+
+            if (currentPage >= totalPages) {
+                currentPage = 1;
+            } else {
+                currentPage++;
+            }
+
+            MainGui.open(player, currentPage);
             break;
 
         case "close":

@@ -26,7 +26,7 @@ public class CommandListener implements CommandExecutor, Listener {
         }
 
         if (args.length == 0) {
-            MainGui.open(player);
+            MainGui.open(player, 1);
             return true;
         }
 
