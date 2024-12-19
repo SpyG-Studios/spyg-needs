@@ -133,7 +133,11 @@ public class MainGui {
     }
 
     public static class ItemWithNeed {
+
+        @Getter
         private final Map.Entry<Material, Integer> item;
+
+        @Getter
         private final PlayerNeeds need;
 
         public ItemWithNeed(Map.Entry<Material, Integer> item, PlayerNeeds need) {
@@ -141,13 +145,6 @@ public class MainGui {
             this.need = need;
         }
 
-        public Map.Entry<Material, Integer> getItem() {
-            return item;
-        }
-
-        public PlayerNeeds getNeed() {
-            return need;
-        }
     }
 
     public static class MainGuiHolder implements InventoryHolder {
