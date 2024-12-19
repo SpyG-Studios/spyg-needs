@@ -1,5 +1,5 @@
 name: SpygNeeds
-main: com.spyg.needs.SpygNeeds
+main: com.spygstudios.needs.SpygNeeds
 version: 1.0
 api-version: 1.16
 authors: [ikoli, Ris]
