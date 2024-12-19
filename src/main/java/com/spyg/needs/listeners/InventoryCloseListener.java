@@ -13,6 +13,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.spyg.needs.SpygNeeds;
+import com.spyg.needs.config.Config;
 import com.spyg.needs.config.Message;
 import com.spyg.needs.gui.ItemAdding.ItemAddingHolder;
 import com.spyg.needs.gui.ItemRequesting.ItemRequestingHolder;
@@ -113,7 +114,24 @@ public class InventoryCloseListener implements Listener {
             return;
         }
 
+        String itemListType = SpygNeeds.getInstance().getConf().getItemListType();
         Player player = ((ItemRequestingHolder) event.getInventory().getHolder()).getPlayer();
+        player.getInventory().addItem(centerItem);
+
+        if (itemListType.equalsIgnoreCase("whitelist")) {
+            if (!SpygNeeds.getInstance().getConf().getItemListItems().contains(centerItem.getType())) {
+                Message.ITEM_BLOCKED.sendMessage(player);
+                return;
+            }
+        }
+
+        if (itemListType.equalsIgnoreCase("blacklist")) {
+            if (SpygNeeds.getInstance().getConf().getItemListItems().contains(centerItem.getType())) {
+                Message.ITEM_BLOCKED.sendMessage(player);
+                return;
+            }
+        }
+
         new PendingNeed(player, centerItem.getType());
         player.getInventory().addItem(centerItem);
     }

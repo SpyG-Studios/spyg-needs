@@ -17,6 +17,8 @@ public enum Message {
 
     NO_PERMISSION("no-permission", "%prefix% &cYou do not have permission to do this."),
 
+    ITEM_BLOCKED("item-blocked", "%prefix% &cYou can't add this item to the needs list."),
+
     CANT_GIVE_YOURSELF("cant-give-yourself", "%prefix% &cYou can't give yourself items."),
 
     WRONG_ITEMS_GIVEN("wrong-items-given", "%prefix% &cYou have added wrong items. &f%player%&c needs &f%item%&c."),
