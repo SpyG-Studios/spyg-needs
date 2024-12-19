@@ -38,7 +38,6 @@ public class PendingNeed {
 
     public void create(int amount) {
         PlayerNeeds playerNeeds = PlayerNeeds.getPlayerNeeds(player);
-        System.out.println("1.: " + material.name() + ": " + amount);
         playerNeeds.addNeed(material, amount);
 
         cancel();
