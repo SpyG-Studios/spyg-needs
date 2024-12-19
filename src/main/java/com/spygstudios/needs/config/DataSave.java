@@ -1,4 +1,4 @@
-package com.spyg.needs.config;
+package com.spygstudios.needs.config;
 
 import java.io.File;
 import java.util.HashMap;
@@ -9,8 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.scheduler.BukkitTask;
 
-import com.spyg.needs.SpygNeeds;
-import com.spyg.needs.needs.PlayerNeeds;
+import com.spygstudios.needs.SpygNeeds;
+import com.spygstudios.needs.needs.PlayerNeeds;
 import com.spygstudios.spyglib.yamlmanager.YamlManager;
 
 public abstract class DataSave extends YamlManager {

@@ -1,4 +1,4 @@
-package com.spyg.needs.config;
+package com.spygstudios.needs.config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.bukkit.Material;
 
-import com.spyg.needs.SpygNeeds;
+import com.spygstudios.needs.SpygNeeds;
 import com.spygstudios.spyglib.yamlmanager.YamlManager;
 
 public class Config extends YamlManager {
@@ -20,7 +20,8 @@ public class Config extends YamlManager {
         set("settings.broadcast-need.chat", true, Arrays.asList("Broadcast a message to the chat if someone added a need."));
 
         set("settings.item_adding-list.enabled", true, Arrays.asList("Enable or disable the item adding list.", "Possible values: true | false", "If disabled (false) all items can be requested."));
-        set("settings.item_adding-list.type", "whitelist", Arrays.asList("Type of the adding list", "Possible values: whitelist | blacklist", "Whitelist: Only items in the list can be added to the needs list.", "Blacklist: All items can be added to the needs list except the ones in the list."));
+        set("settings.item_adding-list.type", "whitelist", Arrays.asList("Type of the adding list", "Possible values: whitelist | blacklist",
+                "Whitelist: Only items in the list can be added to the needs list.", "Blacklist: All items can be added to the needs list except the ones in the list."));
         set("settings.item_adding-list.items", Arrays.asList("apple", "gold_ore"), Arrays.asList("Items that can be added to the needs list."));
 
         saveConfig();

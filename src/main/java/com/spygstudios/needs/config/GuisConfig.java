@@ -1,8 +1,8 @@
-package com.spyg.needs.config;
+package com.spygstudios.needs.config;
 
 import java.util.Arrays;
 
-import com.spyg.needs.SpygNeeds;
+import com.spygstudios.needs.SpygNeeds;
 import com.spygstudios.spyglib.yamlmanager.YamlManager;
 
 public class GuisConfig extends YamlManager {

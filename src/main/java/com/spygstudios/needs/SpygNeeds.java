@@ -1,18 +1,19 @@
-package com.spyg.needs;
+package com.spygstudios.needs;
 
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.spyg.needs.config.Config;
-import com.spyg.needs.config.DataSave;
-import com.spyg.needs.config.GuisConfig;
-import com.spyg.needs.config.Message;
-import com.spyg.needs.listeners.CommandListener;
-import com.spyg.needs.listeners.InventoryClickListener;
-import com.spyg.needs.listeners.InventoryCloseListener;
-import com.spyg.needs.listeners.PlayerChatListener;
+import com.spygstudios.needs.config.Config;
+import com.spygstudios.needs.config.DataSave;
+import com.spygstudios.needs.config.GuisConfig;
+import com.spygstudios.needs.config.Message;
+import com.spygstudios.needs.listeners.CommandListener;
+import com.spygstudios.needs.listeners.InventoryClickListener;
+import com.spygstudios.needs.listeners.InventoryCloseListener;
+import com.spygstudios.needs.listeners.PlayerChatListener;
+
 import lombok.Getter;
 
 public class SpygNeeds extends JavaPlugin {

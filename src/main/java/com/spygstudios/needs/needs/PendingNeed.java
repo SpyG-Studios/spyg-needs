@@ -1,4 +1,4 @@
-package com.spyg.needs.needs;
+package com.spygstudios.needs.needs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.Map;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import com.spyg.needs.config.Message;
+import com.spygstudios.needs.config.Message;
 
 import lombok.Getter;
 

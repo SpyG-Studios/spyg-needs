@@ -1,4 +1,4 @@
-package com.spyg.needs.listeners;
+package com.spygstudios.needs.listeners;
 
 import java.util.Map;
 
@@ -6,9 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import com.spyg.needs.SpygNeeds;
-import com.spyg.needs.config.Message;
-import com.spyg.needs.needs.PendingNeed;
+import com.spygstudios.needs.SpygNeeds;
+import com.spygstudios.needs.config.Message;
+import com.spygstudios.needs.needs.PendingNeed;
 import com.spygstudios.spyglib.components.ComponentUtils;
 
 import io.papermc.paper.event.player.AsyncChatEvent;

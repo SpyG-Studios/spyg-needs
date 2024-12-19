@@ -1,4 +1,4 @@
-package com.spyg.needs.config;
+package com.spygstudios.needs.config;
 
 import java.util.List;
 import java.util.Map;

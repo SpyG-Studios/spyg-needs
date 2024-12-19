@@ -1,4 +1,4 @@
-package com.spyg.needs.listeners;
+package com.spygstudios.needs.listeners;
 
 import java.util.Map;
 import java.util.UUID;
@@ -12,12 +12,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.spyg.needs.SpygNeeds;
-import com.spyg.needs.config.Message;
-import com.spyg.needs.gui.ItemAdding.ItemAddingHolder;
-import com.spyg.needs.gui.ItemRequesting.ItemRequestingHolder;
-import com.spyg.needs.needs.PendingNeed;
-import com.spyg.needs.needs.PlayerNeeds;
+import com.spygstudios.needs.SpygNeeds;
+import com.spygstudios.needs.config.Message;
+import com.spygstudios.needs.gui.ItemAdding.ItemAddingHolder;
+import com.spygstudios.needs.gui.ItemRequesting.ItemRequestingHolder;
+import com.spygstudios.needs.needs.PendingNeed;
+import com.spygstudios.needs.needs.PlayerNeeds;
 import com.spygstudios.spyglib.inventory.InventoryUtils;
 
 public class InventoryCloseListener implements Listener {

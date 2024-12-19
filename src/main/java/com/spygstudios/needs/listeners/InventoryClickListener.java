@@ -1,4 +1,4 @@
-package com.spyg.needs.listeners;
+package com.spygstudios.needs.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -6,13 +6,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.spyg.needs.SpygNeeds;
-import com.spyg.needs.config.Message;
-import com.spyg.needs.gui.ItemAdding;
-import com.spyg.needs.gui.ItemRequesting;
-import com.spyg.needs.gui.MainGui;
-import com.spyg.needs.gui.ItemRequesting.ItemRequestingHolder;
-import com.spyg.needs.gui.MainGui.MainGuiHolder;
+import com.spygstudios.needs.SpygNeeds;
+import com.spygstudios.needs.config.Message;
+import com.spygstudios.needs.gui.ItemAdding;
+import com.spygstudios.needs.gui.ItemRequesting;
+import com.spygstudios.needs.gui.MainGui;
+import com.spygstudios.needs.gui.ItemRequesting.ItemRequestingHolder;
+import com.spygstudios.needs.gui.MainGui.MainGuiHolder;
 import com.spygstudios.spyglib.persistentdata.PersistentData;
 
 public class InventoryClickListener implements Listener {

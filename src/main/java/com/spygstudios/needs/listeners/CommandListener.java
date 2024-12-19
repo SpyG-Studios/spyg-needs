@@ -1,4 +1,4 @@
-package com.spyg.needs.listeners;
+package com.spygstudios.needs.listeners;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -6,9 +6,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-import com.spyg.needs.SpygNeeds;
-import com.spyg.needs.config.Message;
-import com.spyg.needs.gui.MainGui;
+import com.spygstudios.needs.SpygNeeds;
+import com.spygstudios.needs.config.Message;
+import com.spygstudios.needs.gui.MainGui;
 
 public class CommandListener implements CommandExecutor, Listener {
 

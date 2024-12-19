@@ -1,4 +1,4 @@
-package com.spyg.needs.gui;
+package com.spygstudios.needs.gui;
 
 import java.util.List;
 import java.util.Map;
@@ -10,9 +10,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
-import com.spyg.needs.SpygNeeds;
-import com.spyg.needs.config.GuisConfig;
-import com.spyg.needs.needs.PlayerNeeds;
+import com.spygstudios.needs.SpygNeeds;
+import com.spygstudios.needs.config.GuisConfig;
+import com.spygstudios.needs.needs.PlayerNeeds;
 import com.spygstudios.spyglib.color.TranslateColor;
 import com.spygstudios.spyglib.item.ItemUtils;
 import com.spygstudios.spyglib.persistentdata.PersistentData;

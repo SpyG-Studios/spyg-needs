@@ -1,4 +1,4 @@
-package com.spyg.needs.needs;
+package com.spygstudios.needs.needs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,10 +12,10 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
-import com.spyg.needs.SpygNeeds;
-import com.spyg.needs.config.Config;
-import com.spyg.needs.config.DataSave;
-import com.spyg.needs.config.Message;
+import com.spygstudios.needs.SpygNeeds;
+import com.spygstudios.needs.config.Config;
+import com.spygstudios.needs.config.DataSave;
+import com.spygstudios.needs.config.Message;
 import com.spygstudios.spyglib.broadcast.BroadcastMessage;
 
 import lombok.Getter;
@@ -114,11 +114,13 @@ public class PlayerNeeds extends DataSave {
         items.put(material, amount);
 
         if (config.getBoolean("settings.broadcast-need.chat", true)) {
-            BroadcastMessage.chat(Message.BROADCAST_ADDED_NEED_CHAT.getRaw(), Map.of("%player%", requester.getName(), "%item%", material.name(), "%prefix%", config.getPrefix(), "%amount%", String.valueOf(amount)));
+            BroadcastMessage.chat(Message.BROADCAST_ADDED_NEED_CHAT.getRaw(),
+                    Map.of("%player%", requester.getName(), "%item%", material.name(), "%prefix%", config.getPrefix(), "%amount%", String.valueOf(amount)));
         }
 
         if (config.getBoolean("settings.broadcast-need.actionbar", true)) {
-            BroadcastMessage.actionBar(Message.BROADCAST_ADDED_NEED_ACTIONBAR.getRaw(), Map.of("%player%", requester.getName(), "%item%", material.name(), "%prefix%", config.getPrefix(), "%amount%", String.valueOf(amount)));
+            BroadcastMessage.actionBar(Message.BROADCAST_ADDED_NEED_ACTIONBAR.getRaw(),
+                    Map.of("%player%", requester.getName(), "%item%", material.name(), "%prefix%", config.getPrefix(), "%amount%", String.valueOf(amount)));
         }
 
         isChanged = true;
