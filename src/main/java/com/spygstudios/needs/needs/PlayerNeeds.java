@@ -39,6 +39,14 @@ public class PlayerNeeds extends DataSave {
     private boolean isChanged = false;
 
     @Getter
+    @Setter
+    private int itemsGivenOut = 0;
+
+    @Getter
+    @Setter
+    private int itemsReceived = 0;
+
+    @Getter
     private OfflinePlayer requester;
 
     public PlayerNeeds(UUID requester) {
@@ -48,6 +56,7 @@ public class PlayerNeeds extends DataSave {
 
         ConfigurationSection needsSection = getConfigurationSection("needs");
         ConfigurationSection inventorySection = getConfigurationSection("inventory");
+        ConfigurationSection statsSection = getConfigurationSection("inventory");
 
         needs.add(this);
 
@@ -61,6 +70,16 @@ public class PlayerNeeds extends DataSave {
             saveConfig();
         }
 
+        if (statsSection == null) {
+            statsSection = createSection("stats");
+            overwriteSet("stats.items-given-out", 0);
+            overwriteSet("stats.items-received", 0);
+            saveConfig();
+        }
+
+        this.itemsGivenOut = statsSection.getInt("items-given-out");
+        this.itemsReceived = statsSection.getInt("items-received");
+
         for (String key : inventorySection.getKeys(false)) {
             inventory.put(Material.getMaterial(key), inventorySection.getInt(key));
         }
@@ -71,6 +90,18 @@ public class PlayerNeeds extends DataSave {
 
         recalculateNeededByInventory();
 
+    }
+
+    public void addItemsGivenOut(int amount) {
+        itemsGivenOut += amount;
+        overwriteSet("stats.items-given-out", itemsGivenOut);
+        isChanged = true;
+    }
+
+    public void addItemsReceived(int amount) {
+        itemsReceived += amount;
+        overwriteSet("stats.items-received", itemsReceived);
+        isChanged = true;
     }
 
     public void recalculateNeededByInventory() {
@@ -114,13 +145,11 @@ public class PlayerNeeds extends DataSave {
         items.put(material, amount);
 
         if (config.getBoolean("settings.broadcast-need.chat", true)) {
-            BroadcastMessage.chat(Message.BROADCAST_ADDED_NEED_CHAT.getRaw(),
-                    Map.of("%player%", requester.getName(), "%item%", material.name(), "%prefix%", config.getPrefix(), "%amount%", String.valueOf(amount)));
+            BroadcastMessage.chat(Message.BROADCAST_ADDED_NEED_CHAT.getRaw(), Map.of("%player%", requester.getName(), "%item%", material.name(), "%prefix%", config.getPrefix(), "%amount%", String.valueOf(amount)));
         }
 
         if (config.getBoolean("settings.broadcast-need.actionbar", true)) {
-            BroadcastMessage.actionBar(Message.BROADCAST_ADDED_NEED_ACTIONBAR.getRaw(),
-                    Map.of("%player%", requester.getName(), "%item%", material.name(), "%prefix%", config.getPrefix(), "%amount%", String.valueOf(amount)));
+            BroadcastMessage.actionBar(Message.BROADCAST_ADDED_NEED_ACTIONBAR.getRaw(), Map.of("%player%", requester.getName(), "%item%", material.name(), "%prefix%", config.getPrefix(), "%amount%", String.valueOf(amount)));
         }
 
         isChanged = true;

@@ -95,6 +95,11 @@ public class InventoryCloseListener implements Listener {
 
         Message.YOU_HAVE_GIVEN.sendMessage(player, Map.of("%player%", requester.getName(), "%amount%", String.valueOf(givenAmount), "%material%", material.name(), "%item%", material.name()));
 
+        PlayerNeeds giver = PlayerNeeds.getPlayerNeeds(player.getUniqueId());
+
+        giver.addItemsGivenOut(givenAmount);
+        playerNeeds.addItemsReceived(givenAmount);
+
         for (ItemStack item : contents) {
             if (item == null) {
                 continue;
