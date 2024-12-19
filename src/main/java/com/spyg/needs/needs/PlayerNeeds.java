@@ -75,7 +75,7 @@ public class PlayerNeeds extends DataSave {
 
     public void recalculateNeededByInventory() {
 
-        for (Material need : items.keySet()) {
+        for (Material need : new HashMap<>(items).keySet()) {
             for (Material material : inventory.keySet()) {
 
                 if (material.equals(need)) {
