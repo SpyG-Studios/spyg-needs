@@ -13,7 +13,6 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.spyg.needs.SpygNeeds;
-import com.spyg.needs.config.Config;
 import com.spyg.needs.config.Message;
 import com.spyg.needs.gui.ItemAdding.ItemAddingHolder;
 import com.spyg.needs.gui.ItemRequesting.ItemRequestingHolder;
