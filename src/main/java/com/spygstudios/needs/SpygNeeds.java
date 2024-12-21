@@ -1,14 +1,21 @@
 package com.spygstudios.needs;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.spygstudios.needs.config.Config;
 import com.spygstudios.needs.config.DataSave;
 import com.spygstudios.needs.config.GuisConfig;
 import com.spygstudios.needs.config.Message;
+import com.spygstudios.needs.gui.ItemRequesting;
+import com.spygstudios.needs.gui.MainGui;
+import com.spygstudios.needs.gui.ItemAdding.ItemAddingHolder;
 import com.spygstudios.needs.listeners.CommandListener;
 import com.spygstudios.needs.listeners.InventoryClickListener;
 import com.spygstudios.needs.listeners.InventoryCloseListener;
@@ -47,6 +54,20 @@ public class SpygNeeds extends JavaPlugin {
 
     public void onDisable() {
         DataSave.saveAll();
+        List<Object> guis = new ArrayList<>() {
+            {
+                add(ItemAddingHolder.class);
+                add(MainGui.MainGuiHolder.class);
+                add(ItemRequesting.ItemRequestingHolder.class);
+            }
+        };
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            InventoryHolder holder = player.getOpenInventory().getTopInventory().getHolder();
+            if (guis.contains(holder.getClass())) {
+                player.closeInventory();
+            }
+        }
+
         getLogger().info("<plugin> v. <version> plugin has been disabled!".replace("<plugin>", getName()).replace("<version>", getPluginMeta().getVersion()));
     }
 
