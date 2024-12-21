@@ -71,7 +71,6 @@ public class InventoryClickListener implements Listener {
 
         switch (action) {
         case "refresh":
-            player.closeInventory();
             int currentPage = data.getInt("page");
             MainGui.open(player, currentPage);
             break;
@@ -91,8 +90,6 @@ public class InventoryClickListener implements Listener {
             break;
 
         case "next_page":
-            player.closeInventory();
-
             currentPage = data.getInt("page");
             totalPages = data.getInt("total_pages");
 
@@ -110,11 +107,9 @@ public class InventoryClickListener implements Listener {
             break;
 
         case "request":
-            player.closeInventory();
             ItemRequesting.open(player);
             break;
         case "give":
-            player.closeInventory();
 
             String material = data.getString("material");
             int amount = data.getInt("amount");
