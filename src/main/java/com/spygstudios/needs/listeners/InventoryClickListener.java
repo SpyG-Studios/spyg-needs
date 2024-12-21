@@ -17,8 +17,11 @@ import com.spygstudios.spyglib.persistentdata.PersistentData;
 
 public class InventoryClickListener implements Listener {
 
+    private static SpygNeeds plugin;
+
     public InventoryClickListener(SpygNeeds plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        plugin = SpygNeeds.getInstance();
     }
 
     @EventHandler
@@ -57,7 +60,7 @@ public class InventoryClickListener implements Listener {
     }
 
     private void mainGui(InventoryClickEvent event) {
-        PersistentData data = new PersistentData(SpygNeeds.getInstance(), event.getCurrentItem());
+        PersistentData data = new PersistentData(plugin, event.getCurrentItem());
 
         String action = data.getString("action");
 

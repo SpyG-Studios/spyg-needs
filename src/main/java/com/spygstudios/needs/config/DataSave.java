@@ -15,10 +15,11 @@ import com.spygstudios.spyglib.yamlmanager.YamlManager;
 
 public abstract class DataSave extends YamlManager {
 
+    private static SpygNeeds plugin = SpygNeeds.getInstance();
     private static BukkitTask saveTaskId;
 
     public DataSave(UUID uuid) {
-        super("data/" + uuid.toString() + ".yml", SpygNeeds.getInstance());
+        super("data/" + uuid.toString() + ".yml", plugin);
     }
 
     public Map<Material, Integer> getItemsInFile() {
@@ -44,7 +45,7 @@ public abstract class DataSave extends YamlManager {
     }
 
     public static void loadAll() {
-        File dataFolder = new File(SpygNeeds.getInstance().getDataFolder(), "data");
+        File dataFolder = new File(plugin.getDataFolder(), "data");
         File[] files = dataFolder.listFiles();
 
         if (files != null) {
@@ -68,7 +69,7 @@ public abstract class DataSave extends YamlManager {
     }
 
     public static void startSavingTask() {
-        saveTaskId = SpygNeeds.getInstance().getServer().getScheduler().runTaskTimerAsynchronously(SpygNeeds.getInstance(), new Runnable() {
+        saveTaskId = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
 
             @Override
             public void run() {

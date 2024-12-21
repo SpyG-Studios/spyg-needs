@@ -12,8 +12,8 @@ import lombok.Getter;
 
 public class ItemAdding {
     public static void open(Player player, String material, int amount, String requester) {
-        GuisConfig config = SpygNeeds.getInstance().getGuisConfig();
         SpygNeeds plugin = SpygNeeds.getInstance();
+        GuisConfig config = plugin.getGuisConfig();
         Inventory inventory = player.getServer().createInventory(new ItemAddingHolder(player, material, amount, requester), 27, TranslateColor.translate(config.getString("item_adding.title").replace("%material%", material).replace("%amount%", String.valueOf(amount)).replace("%requester%", plugin.getNameFromUUID(requester))));
 
         player.openInventory(inventory);
