@@ -13,8 +13,6 @@ import com.spygstudios.needs.config.Config;
 import com.spygstudios.needs.config.DataSave;
 import com.spygstudios.needs.config.GuisConfig;
 import com.spygstudios.needs.config.Message;
-import com.spygstudios.needs.gui.ItemRequesting;
-import com.spygstudios.needs.gui.MainGui;
 import com.spygstudios.needs.gui.ItemAdding.ItemAddingHolder;
 import com.spygstudios.needs.gui.ItemRequesting.ItemRequestingHolder;
 import com.spygstudios.needs.gui.MainGui.MainGuiHolder;
