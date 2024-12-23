@@ -79,7 +79,6 @@ public class InventoryClickListener implements Listener {
             break;
 
         case "previous_page":
-            player.closeInventory();
             currentPage = data.getInt("page");
             int totalPages = data.getInt("total_pages");
 
