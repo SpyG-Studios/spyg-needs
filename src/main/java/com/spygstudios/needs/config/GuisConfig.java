@@ -19,7 +19,7 @@ public class GuisConfig extends YamlManager {
 
         set("main.title", "&8Player needs &8(&7%current_page%&8/&7%total_pages%&8)");
         set("main.needed-slots", "0-45", Arrays.asList("The slots that will be used to display player's needs."));
-        set("main.need.name", "&7%player%'s needs");
+        set("main.need.name", "&7%player%'s needs", Arrays.asList("The name of the item that will be displayed for each need.", "If set to 'none', no custom displayname will be set and the item will be displayed as the material name."));
         set("main.need.material", "%material%");
         set("main.need.lore", Arrays.asList("&r", "&7Amount: %amount%"));
 
