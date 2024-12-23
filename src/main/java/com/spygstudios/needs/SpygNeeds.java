@@ -16,6 +16,8 @@ import com.spygstudios.needs.config.Message;
 import com.spygstudios.needs.gui.ItemRequesting;
 import com.spygstudios.needs.gui.MainGui;
 import com.spygstudios.needs.gui.ItemAdding.ItemAddingHolder;
+import com.spygstudios.needs.gui.ItemRequesting.ItemRequestingHolder;
+import com.spygstudios.needs.gui.MainGui.MainGuiHolder;
 import com.spygstudios.needs.listeners.CommandListener;
 import com.spygstudios.needs.listeners.InventoryClickListener;
 import com.spygstudios.needs.listeners.InventoryCloseListener;
@@ -57,8 +59,8 @@ public class SpygNeeds extends JavaPlugin {
         List<Object> guis = new ArrayList<>() {
             {
                 add(ItemAddingHolder.class);
-                add(MainGui.MainGuiHolder.class);
-                add(ItemRequesting.ItemRequestingHolder.class);
+                add(MainGuiHolder.class);
+                add(ItemRequestingHolder.class);
             }
         };
         for (Player player : Bukkit.getOnlinePlayers()) {
