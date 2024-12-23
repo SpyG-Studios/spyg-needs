@@ -76,7 +76,7 @@ public class MainGui {
 
         Component title = TranslateColor.translate(config.getString("main.title").replace("%current_page%", String.valueOf(page)).replace("%total_pages%", String.valueOf(totalPages)));
 
-        Inventory inventory = player.getServer().createInventory(new MainGuiHolder(player), 54, title);
+        Inventory inventory = player.getServer().createInventory(new MainGuiHolder(player, page, totalPages), 54, title);
 
         int slotIndex = startSlot;
         for (ItemWithNeed itemWithNeed : itemsOnPage) {
@@ -121,10 +121,8 @@ public class MainGui {
 
                 PersistentData data = new PersistentData(SpygNeeds.getInstance(), item);
                 data.set("action", key);
-                data.set("page", page);
-                data.set("total_pages", totalPages);
-
                 data.save();
+
                 inventory.setItem(slot, item);
             }
         }
@@ -152,8 +150,16 @@ public class MainGui {
         @Getter
         private final Player player;
 
-        public MainGuiHolder(Player player) {
+        @Getter
+        private final int page;
+
+        @Getter
+        private final int totalPages;
+
+        public MainGuiHolder(Player player, int page, int totalPages) {
             this.player = player;
+            this.page = page;
+            this.totalPages = totalPages;
         }
 
         @Override

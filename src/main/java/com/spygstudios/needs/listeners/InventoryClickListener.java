@@ -71,16 +71,17 @@ public class InventoryClickListener implements Listener {
         event.setCancelled(true);
 
         Player player = ((MainGuiHolder) event.getInventory().getHolder()).getPlayer();
+        MainGuiHolder dataHolder = (MainGuiHolder) event.getInventory().getHolder();
 
         switch (action) {
         case "refresh":
-            int currentPage = data.getInt("page");
+            int currentPage = dataHolder.getPage();
             MainGui.open(player, currentPage);
             break;
 
         case "previous_page":
-            currentPage = data.getInt("page");
-            int totalPages = data.getInt("total_pages");
+            currentPage = dataHolder.getPage();
+            int totalPages = dataHolder.getTotalPages();
 
             if (currentPage <= 1) {
                 currentPage = totalPages;
@@ -92,8 +93,8 @@ public class InventoryClickListener implements Listener {
             break;
 
         case "next_page":
-            currentPage = data.getInt("page");
-            totalPages = data.getInt("total_pages");
+            currentPage = dataHolder.getPage();
+            totalPages = dataHolder.getTotalPages();
 
             if (currentPage >= totalPages) {
                 currentPage = 1;
