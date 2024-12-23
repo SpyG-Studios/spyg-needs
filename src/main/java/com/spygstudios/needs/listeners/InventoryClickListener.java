@@ -17,11 +17,11 @@ import com.spygstudios.spyglib.persistentdata.PersistentData;
 
 public class InventoryClickListener implements Listener {
 
-    private static SpygNeeds plugin;
+    private SpygNeeds plugin;
 
     public InventoryClickListener(SpygNeeds plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        plugin = SpygNeeds.getInstance();
+        this.plugin = SpygNeeds.getInstance();
     }
 
     @EventHandler
