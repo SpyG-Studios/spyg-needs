@@ -10,12 +10,13 @@ public class GuisConfig extends YamlManager {
     public GuisConfig(SpygNeeds plugin) {
         super("guis.yml", plugin);
 
+        set("inventory.title", "&8Your Inventory");
+        set("item_adding.title", "&7%requester% is requesting %amount% of %material%");
+
         set("item_requesting.title", "&7Place the item that you need.");
         set("item_requesting.filleritem.name", "-");
         set("item_requesting.filleritem.material", "GRAY_STAINED_GLASS_PANE");
         set("item_requesting.filleritem.lore", Arrays.asList("&r"));
-
-        set("item_adding.title", "&7%requester% is requesting %amount% of %material%");
 
         set("main.title", "&8Player needs &8(&7%current_page%&8/&7%total_pages%&8)");
         set("main.needed-slots", "0-45", Arrays.asList("The slots that will be used to display player's needs."));
@@ -27,6 +28,11 @@ public class GuisConfig extends YamlManager {
         set("main.items.refresh.material", "PAPER");
         set("main.items.refresh.slot", 47);
         set("main.items.refresh.lore", Arrays.asList("&r", "&7Click to refresh the list."));
+
+        set("main.items.inventory.name", "&6Inventory");
+        set("main.items.inventory.material", "CHEST");
+        set("main.items.inventory.slot", 50);
+        set("main.items.inventory.lore", Arrays.asList("&r", "&7Click to open your inventory.", "&7and see the items you have been given by other players."));
 
         set("main.items.close.name", "&cClose");
         set("main.items.close.material", "BARRIER");

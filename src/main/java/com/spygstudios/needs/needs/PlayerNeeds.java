@@ -32,6 +32,7 @@ public class PlayerNeeds extends DataSave {
     private Map<Material, Integer> items = new HashMap<Material, Integer>();
 
     @Getter
+    @Setter
     private Map<Material, Integer> inventory = new HashMap<Material, Integer>();
 
     @Getter

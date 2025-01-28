@@ -1,5 +1,6 @@
 package com.spygstudios.needs.listeners;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,9 +9,11 @@ import org.bukkit.inventory.ItemStack;
 
 import com.spygstudios.needs.SpygNeeds;
 import com.spygstudios.needs.config.Message;
+import com.spygstudios.needs.gui.InventoryGui;
 import com.spygstudios.needs.gui.ItemAdding;
 import com.spygstudios.needs.gui.ItemRequesting;
 import com.spygstudios.needs.gui.MainGui;
+import com.spygstudios.needs.gui.InventoryGui.InventoryGuiHolder;
 import com.spygstudios.needs.gui.ItemRequesting.ItemRequestingHolder;
 import com.spygstudios.needs.gui.MainGui.MainGuiHolder;
 import com.spygstudios.spyglib.persistentdata.PersistentData;
@@ -45,6 +48,21 @@ public class InventoryClickListener implements Listener {
         if (event.getInventory().getHolder() instanceof ItemRequestingHolder) {
             requestingGui(event);
             return;
+        }
+
+        if (event.getInventory().getHolder() instanceof InventoryGuiHolder) {
+            inventoryGui(event);
+            return;
+        }
+
+    }
+
+    private void inventoryGui(InventoryClickEvent event) {
+
+        if (!(event.getClickedInventory().getHolder() instanceof InventoryGuiHolder)) {
+            if (event.getCurrentItem().getType() != Material.AIR) {
+                event.setCancelled(true);
+            }
         }
 
     }
@@ -124,6 +142,10 @@ public class InventoryClickListener implements Listener {
             }
 
             ItemAdding.open(player, material, amount, requester);
+            break;
+
+        case "inventory":
+            InventoryGui.open(player);
             break;
 
         default:

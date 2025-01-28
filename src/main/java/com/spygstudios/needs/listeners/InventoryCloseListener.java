@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.spygstudios.needs.SpygNeeds;
 import com.spygstudios.needs.config.Message;
+import com.spygstudios.needs.gui.InventoryGui.InventoryGuiHolder;
 import com.spygstudios.needs.gui.ItemAdding.ItemAddingHolder;
 import com.spygstudios.needs.gui.ItemRequesting.ItemRequestingHolder;
 import com.spygstudios.needs.needs.PendingNeed;
@@ -29,6 +30,11 @@ public class InventoryCloseListener implements Listener {
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
 
+        if (event.getInventory().getHolder() instanceof InventoryGuiHolder) {
+            inventoryGui(event);
+            return;
+        }
+
         if (event.getInventory().getHolder() instanceof ItemRequestingHolder) {
             itemRequesting(event);
             return;
@@ -39,6 +45,28 @@ public class InventoryCloseListener implements Listener {
             return;
         }
 
+    }
+
+    private void inventoryGui(InventoryCloseEvent event) {
+
+        PlayerNeeds playerNeeds = PlayerNeeds.getPlayerNeeds(((InventoryGuiHolder) event.getInventory().getHolder()).getPlayer().getUniqueId());
+
+        Map<Material, Integer> inventory = playerNeeds.getInventory();
+        inventory.clear();
+        for (ItemStack item : event.getInventory().getContents()) {
+            if (item == null) {
+                continue;
+            }
+
+            Material material = item.getType();
+            int amount = item.getAmount();
+
+            if (inventory.containsKey(material)) {
+                playerNeeds.addInventory(material, amount);
+            }
+        }
+
+        playerNeeds.setChanged(true);
     }
 
     private void itemAdding(InventoryCloseEvent event) {
